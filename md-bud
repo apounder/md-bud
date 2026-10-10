@@ -1,0 +1,623 @@
+#!/usr/bin/env python3
+"""Generate and manage AMBER/Slurm campaigns. Python standard library only."""
+import argparse
+from contextlib import contextmanager, ExitStack
+from datetime import datetime, timezone
+from decimal import Decimal
+import fcntl
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import random
+import re
+import shlex
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+
+if sys.version_info < (3, 11):
+    sys.exit("md-bud requires Python 3.11 or newer.")
+
+VERSION = "1.0.0"
+MODULES = "StdEnv/2023 gcc/12.3 openmpi/4.1.5 cuda/12.2 amber-pmemd/24.3 ambertools/25.0"
+TERMINAL = {"BOOT_FAIL", "CANCELLED", "COMPLETED", "DEADLINE", "FAILED", "NODE_FAIL",
+            "OUT_OF_MEMORY", "PREEMPTED", "REVOKED", "TIMEOUT"}
+
+
+def fail(message):
+    raise ValueError(message)
+
+
+def run(command, **kwargs):
+    result = subprocess.run(command, text=True, capture_output=True, timeout=60, **kwargs)
+    if result.returncode:
+        fail(f"{command[0]} failed: {result.stderr.strip() or result.stdout.strip()}")
+    return result.stdout.strip()
+
+
+def save(root, manifest):
+    target = root / "md-bud.json"
+    temporary = root / "md-bud.json.tmp"
+    with temporary.open("w") as stream:
+        json.dump(manifest, stream, indent=2)
+        stream.write("\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+    temporary.replace(target)
+
+
+def load(root):
+    manifest = json.loads((root / "md-bud.json").read_text())
+    if manifest.get("version") != VERSION:
+        fail("Unsupported campaign version.")
+    for job in manifest["jobs"].values():
+        if job.get("id") is not None and not re.fullmatch(r"[0-9]+", str(job["id"])):
+            fail("Invalid scheduler job ID in manifest.")
+    for replica in manifest["replicas"]:
+        if not re.fullmatch(r"replica-[0-9]+", replica["name"]):
+            fail("Invalid replica directory in manifest.")
+        directory = root / replica["name"]
+        if directory.is_symlink() or directory.resolve().parent != root:
+            fail("Replica directories must stay inside the campaign.")
+        for stage in replica["stages"]:
+            for token in [stage["name"], *stage["tags"]]:
+                if not re.fullmatch(r"[a-z]+(?:-[0-9]+)?", token):
+                    fail("Invalid stage filename in manifest.")
+            for output in stage["outputs"]:
+                if Path(output).name != output or output in {".", ".."}:
+                    fail("Invalid output filename in manifest.")
+    return manifest
+
+
+@contextmanager
+def locked(root):
+    with (root / ".md-bud.lock").open("a") as stream:
+        try:
+            fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            fail("Another md-bud command is changing this campaign.")
+        yield
+
+
+def positive(value):
+    number = int(value)
+    if number < 1:
+        raise argparse.ArgumentTypeError("must be a positive integer")
+    return number
+
+
+def number(value):
+    number = float(value)
+    if not math.isfinite(number) or number <= 0:
+        raise argparse.ArgumentTypeError("must be a finite positive number")
+    return number
+
+
+def namelist(title, values):
+    return title + "\n&cntrl\n  " + ",\n  ".join(f"{key}={value}" for key, value in values.items()) + ",\n/\n"
+
+
+def batch(config, replica, stage, commands, outputs, tags, kind):
+    cpu = kind == "prep" or config["engine"] == "cpu"
+    tasks = config["prep_tasks"] if kind == "prep" else config["cpus"]
+    if kind == "analysis":
+        tasks, cpu = 1, True
+    wall = config[{"prep": "prep_walltime", "analysis": "analysis_walltime"}.get(kind, "walltime")]
+    memory = config["prep_mem"] if kind == "prep" else config["mem"]
+    header = ["#!/bin/bash", f"#SBATCH --job-name=md-bud-{replica}-{stage}",
+              "#SBATCH --nodes=1", f"#SBATCH --account={config['account']}",
+              f"#SBATCH --time={wall}", f"#SBATCH --mem={memory}",
+              f"#SBATCH --ntasks={tasks if cpu else 1}", "#SBATCH --cpus-per-task=1",
+              f"#SBATCH --output={stage}.slurm-%j.log"]
+    if not cpu:
+        header.append(f"#SBATCH --gres={config['gpu']}")
+    if config["partition"]:
+        header.append(f"#SBATCH --partition={config['partition']}")
+    if config["mail"]:
+        header.extend([f"#SBATCH --mail-user={config['mail']}", "#SBATCH --mail-type=FAIL,END"])
+    # Slurm executes a spool copy; --chdir sets the real replica directory.
+    body = ["set -euo pipefail", 'if [[ -z ${SLURM_JOB_ID:-} ]]; then cd -- "$(dirname -- "$(realpath -- "$0")")"; fi',
+            "test -s ../inputs/topology.prmtop",
+            f"exec 9> .{stage}.lock", "flock -n 9 || { echo 'Stage already running' >&2; exit 1; }",
+            f"[[ ! -e {stage}.done ]] || {{ echo 'Already completed; use md-bud reset' >&2; exit 1; }}"]
+    # Partial outputs must be archived before a stage can run again.
+    for tag in tags:
+        body.append(f"for f in {tag}.out {tag}.rst7 {tag}.nc {tag}.info; do\n"
+                    "  [[ ! -e $f ]] || { echo \"Existing output: $f; use md-bud reset\" >&2; exit 1; }\ndone")
+    if config["modules"]:
+        body.extend(["module --force purge", "module load " + shlex.join(config["modules"])])
+    body.extend(['export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-1}"', *commands])
+    for output in outputs:
+        body.append(f"test -s {shlex.quote(output)}")
+    body.extend([f'printf "%s\\n" "${{SLURM_JOB_ID:-manual}}" > {stage}.done.tmp',
+                 f"mv -- {stage}.done.tmp {stage}.done"])
+    return "\n".join(header) + "\n\n" + "\n".join(body) + "\n"
+
+
+def add_stage(directory, config, replica, name, specs, initial, kind):
+    commands, outputs, tags = [], [], []
+    engine = "srun pmemd.MPI" if kind == "prep" or config["engine"] == "cpu" else "pmemd.cuda"
+    for tag, values in specs:
+        tags.append(tag)
+        (directory / f"{tag}.in").write_text(namelist(tag, values))
+        commands.append(f"test -s {initial}")
+        command = (f"{engine} -O -i {tag}.in -o {tag}.out -p ../inputs/topology.prmtop "
+                   f"-c {initial} -r {tag}.rst7 -inf {tag}.info")
+        if values.get("ntr", 0):
+            command += f" -ref {initial}"
+        if not values.get("imin", 0):
+            command += f" -x {tag}.nc"
+            outputs.append(f"{tag}.nc")
+        commands.append(command)
+        outputs.extend([f"{tag}.rst7", f"{tag}.out"])
+        initial = f"{tag}.rst7"
+    script = directory / f"{name}.sh"
+    script.write_text(batch(config, replica["name"], name, commands, outputs, tags, kind))
+    script.chmod(0o755)
+    replica["stages"].append({"name": name, "tags": tags, "outputs": outputs})
+    return initial
+
+
+def generate(args):
+    config = vars(args).copy()
+    for key in ["command", "output", "topology", "coordinates", "restraints", "submit"]:
+        config.pop(key)
+    config["modules"] = shlex.split(config["modules"])
+    for key in ["account", "partition", "gpu", "mem", "prep_mem"]:
+        if config[key] and not re.fullmatch(r"[A-Za-z0-9_:.+-]+", config[key]):
+            fail(f"Invalid --{key.replace('_', '-')} value.")
+    if not config["account"]:
+        fail("Provide --account or set SLURM_ACCOUNT.")
+    for key in ["walltime", "prep_walltime", "analysis_walltime"]:
+        if not re.fullmatch(r"(?:[0-9]+-)?[0-9]+:[0-5][0-9](?::[0-5][0-9])?", config[key]):
+            fail(f"Invalid --{key.replace('_', '-')} time.")
+    if config["mail"] and (re.search(r"[\s\r\n]", config["mail"]) or "@" not in config["mail"]):
+        fail("Invalid notification email.")
+    if any(c in config["restraint_mask"] for c in "'\r\n"):
+        fail("Restraint mask cannot contain quotes or newlines.")
+    if config["dt"] > 0.002:
+        fail("This SHAKE protocol supports --dt up to 0.002 ps; larger steps need a different protocol.")
+    steps = Decimal(str(config["ns"])) * 1000 / Decimal(str(config["dt"]))
+    if steps != steps.to_integral_value():
+        fail("--ns must be an exact multiple of --dt (converted from ns to ps).")
+    config["steps"] = int(steps)
+    if config["ntwx"] > config["steps"]:
+        fail("--ntwx exceeds the segment step count; no trajectory frames would be written.")
+    config["seed"] = config["seed"] or random.SystemRandom().randrange(1, 2**31 - 1)
+    if config["seed"] >= 2**31:
+        fail("--seed must be below 2147483648.")
+    if config["combine"] and config["workflow"] == "prep":
+        fail("--combine requires production segments.")
+    sources = {"topology.prmtop": Path(args.topology), "initial.rst7": Path(args.coordinates)}
+    if args.restraints:
+        sources["restraints.dist"] = Path(args.restraints)
+        if config["workflow"] == "prep":
+            fail("--restraints applies to production; omit it for prep-only campaigns.")
+    for path in sources.values():
+        if not path.is_file() or path.stat().st_size == 0:
+            fail(f"Missing or empty input: {path}")
+    root = Path(args.output).absolute()
+    if root.exists() or root.is_symlink():
+        fail("Output already exists. Choose a new directory or reset the existing campaign.")
+    root.parent.mkdir(parents=True, exist_ok=True)
+    temporary = Path(tempfile.mkdtemp(prefix=".md-bud-", dir=root.parent))
+    try:
+        (temporary / "inputs").mkdir()
+        checksums = {}
+        for name, path in sources.items():
+            target = temporary / "inputs" / name
+            shutil.copyfile(path, target)
+            with target.open("rb") as stream:
+                checksums[name] = hashlib.file_digest(stream, "sha256").hexdigest()
+        manifest = {"version": VERSION, "config": config, "inputs": checksums,
+                    "replicas": [], "jobs": {}, "archives": []}
+        for index in range(1, config["replicas"] + 1):
+            replica = {"name": f"replica-{index:03d}", "stages": []}
+            directory = temporary / replica["name"]
+            directory.mkdir()
+            initial = "../inputs/initial.rst7"
+            mask = "'" + config["restraint_mask"] + "'"
+            def seed(offset):
+                return (config["seed"] + (index - 1) * (config["segments"] + 32) + offset) % (2**31 - 2) + 1
+            if config["workflow"] != "production":
+                specs = []
+                for n, cycles, selected in [(1, 4000, mask), (2, 2000, "'!@H='"),
+                                             (3, 2000, mask), (4, 3000, None)]:
+                    values = dict(imin=1, maxcyc=cycles, ncyc=1000, ntb=1, ntf=1,
+                                  cut=config["cutoff"], ntpr=10, ntr=int(selected is not None))
+                    if selected:
+                        values.update(restraintmask=selected, restraint_wt=100.0)
+                    specs.append((f"min-{n:02d}", values))
+                initial = add_stage(directory, config, replica, "min", specs, initial, "prep")
+                specs = []
+                for n in range(1, 7):
+                    target = 10 + (config["temperature"] - 10) * n / 6
+                    values = dict(imin=0, nstlim=20000, dt=0.001, ntx=1 if n == 1 else 5,
+                                  irest=0 if n == 1 else 1, ntb=1, ntp=0, ntc=1, ntf=1,
+                                  ntpr=250, ntwr=1000, ntwx=250, ioutfm=1, ntt=3,
+                                  ig=seed(n), gamma_ln=1.0, tempi=10.0, temp0=target,
+                                  cut=config["cutoff"], ntr=1, restraintmask=mask, restraint_wt=25.0)
+                    specs.append((f"heat-{n:02d}", values))
+                initial = add_stage(directory, config, replica, "heat", specs, initial, "prep")
+                specs = []
+                for n, weight in enumerate([20, 15, 10, 5, 1.5], 1):
+                    values = dict(imin=0, nstlim=10000, dt=config["dt"], ntx=5, irest=1,
+                                  ntb=2 if config["ensemble"] == "npt" else 1,
+                                  ntp=1 if config["ensemble"] == "npt" else 0,
+                                  ntc=2, ntf=2, ntpr=250, ntwr=1000, ntwx=250, ioutfm=1,
+                                  ntt=3, ig=seed(10+n), gamma_ln=1.0, temp0=config["temperature"],
+                                  cut=config["cutoff"], ntr=1, restraintmask=mask, restraint_wt=weight)
+                    if config["ensemble"] == "npt":
+                        values.update(pres0=config["pressure"], taup=2.0)
+                    specs.append((f"eq-{n:02d}", values))
+                initial = add_stage(directory, config, replica, "eq", specs, initial, "prep")
+            if config["workflow"] != "prep":
+                for segment in range(1, config["segments"] + 1):
+                    name = f"md-{segment:04d}"
+                    values = dict(imin=0, irest=1, ntx=5, nstlim=config["steps"], dt=config["dt"],
+                                  ntb=2 if config["ensemble"] == "npt" else 1,
+                                  ntp=1 if config["ensemble"] == "npt" else 0, ntc=2, ntf=2,
+                                  temp0=config["temperature"], ntt=3, gamma_ln=3.0, ig=seed(32+segment),
+                                  cut=config["cutoff"], ntr=0, ioutfm=1, ntpr=config["ntpr"],
+                                  ntwx=config["ntwx"], ntwr=config["ntwr"])
+                    if config["ensemble"] == "npt":
+                        values.update(pres0=config["pressure"], taup=2.0)
+                    if args.restraints:
+                        values["nmropt"] = 1
+                    initial = add_stage(directory, config, replica, name, [(name, values)], initial, "production")
+                    if args.restraints:
+                        with (directory / f"{name}.in").open("a") as stream:
+                            stream.write("&wt type='DUMPFREQ', istep1=" + str(config["ntwx"]) + ", /\n"
+                                         "&wt type='END', /\nDISANG=../inputs/restraints.dist\n"
+                                         f"DUMPAVE={name}.distances.dat\n")
+                if config["combine"]:
+                    trajectories = [f"md-{n:04d}.nc" for n in range(1, config["segments"] + 1)]
+                    content = "parm ../inputs/topology.prmtop\n" + "".join(f"trajin {p}\n" for p in trajectories)
+                    (directory / "combine.in").write_text(content + "autoimage\ntrajout combined.nc netcdf\nrun\nquit\n")
+                    commands = [f"test -s {path}" for path in trajectories] + ["cpptraj -i combine.in > combine.out"]
+                    (directory / "combine.sh").write_text(batch(config, replica["name"], "combine", commands,
+                                                               ["combined.nc", "combine.out"], ["combined", "combine"], "analysis"))
+                    replica["stages"].append({"name": "combine", "tags": ["combined", "combine"],
+                                               "outputs": ["combined.nc", "combine.out"]})
+            manifest["replicas"].append(replica)
+        save(temporary, manifest)
+        # Reserve the destination atomically so simultaneous generators cannot replace it.
+        root.mkdir()
+        temporary.rename(root)
+    finally:
+        if temporary.exists():
+            shutil.rmtree(temporary)
+    print(f"Generated {root}: {config['replicas']} replicas, workflow={config['workflow']}.")
+    if args.submit:
+        submit(argparse.Namespace(project=str(root), replica=None, dry_run=False))
+
+
+def selected(manifest, number):
+    replicas = manifest["replicas"]
+    if number is not None:
+        if number > len(replicas):
+            fail("Replica number is outside this campaign.")
+        replicas = [replicas[number - 1]]
+    return replicas
+
+
+def complete(directory, stage):
+    return (directory / f"{stage['name']}.done").is_file() and all(
+        (directory / output).is_file() and (directory / output).stat().st_size > 0
+        for output in stage["outputs"])
+
+
+def artifacts(directory, stage):
+    names = {f"{stage['name']}.done", f"{stage['name']}.done.tmp"}
+    names.update(stage["outputs"])
+    for tag in stage["tags"]:
+        names.update(f"{tag}.{suffix}" for suffix in ["out", "rst7", "nc", "info", "distances.dat"])
+    result = [directory / name for name in names if (directory / name).exists() or (directory / name).is_symlink()]
+    result.extend(directory.glob(f"{stage['name']}.slurm-*.log"))
+    return sorted(set(result))
+
+
+def scheduler_states(jobs):
+    ids = sorted({job["id"] for job in jobs.values() if job.get("id")})
+    if not ids:
+        return {}
+    joined = ",".join(ids)
+    states = {}
+    accounting = run(["sacct", "-n", "-P", "-j", joined, "--format=JobIDRaw,State"])
+    for line in accounting.splitlines():
+        fields = line.split("|")
+        if len(fields) >= 2 and fields[0] in ids:
+            states[fields[0]] = fields[1].split()[0].rstrip("+")
+    queue = run(["squeue", "--me", "-h", "-o", "%i|%T"])
+    for line in queue.splitlines():
+        fields = line.split("|")
+        if len(fields) == 2 and fields[0] in ids:
+            states[fields[0]] = fields[1]
+    return states
+
+
+def submit(args):
+    root = Path(args.project).resolve()
+    with locked(root):
+        manifest = load(root)
+        for name, expected in manifest["inputs"].items():
+            if Path(name).name != name:
+                fail("Invalid input filename in manifest.")
+            with (root / "inputs" / name).open("rb") as stream:
+                if hashlib.file_digest(stream, "sha256").hexdigest() != expected:
+                    fail("Campaign inputs have changed. Generate a new campaign to change inputs.")
+        replicas = selected(manifest, args.replica)
+        tracked = {key: job for key, job in manifest["jobs"].items()
+                   if key.split("/")[0] in {rep["name"] for rep in replicas}}
+        states = scheduler_states(tracked) if tracked else {}
+        # Preflight the entire selection before submitting any job.
+        for replica in replicas:
+            directory = root / replica["name"]
+            first_incomplete = None
+            for stage in replica["stages"]:
+                key = replica["name"] + "/" + stage["name"]
+                job = manifest["jobs"].get(key)
+                if complete(directory, stage):
+                    if first_incomplete:
+                        fail(f"{key}: completed downstream of incomplete {first_incomplete}; reset from that earlier stage.")
+                    continue
+                first_incomplete = first_incomplete or stage["name"]
+                if job:
+                    state = states.get(job.get("id"), "UNKNOWN")
+                    if state in TERMINAL or state == "UNKNOWN":
+                        fail(f"{key}: {state} without verified completion. Reset this stage before resubmitting.")
+                elif artifacts(directory, stage):
+                    fail(f"{key}: existing outputs; archive them using reset before submitting.")
+        for replica in replicas:
+            directory = root / replica["name"]
+            predecessor = None
+            for stage in replica["stages"]:
+                key = replica["name"] + "/" + stage["name"]
+                if complete(directory, stage):
+                    print(f"{key}: complete; keeping outputs")
+                    predecessor = None
+                    continue
+                existing = manifest["jobs"].get(key)
+                if existing:
+                    predecessor = existing["id"]
+                    print(f"{key}: already submitted as {predecessor}")
+                    continue
+                command = ["sbatch", "--parsable", "--kill-on-invalid-dep=yes", f"--chdir={directory}"]
+                if predecessor:
+                    command.append(f"--dependency=afterok:{predecessor}")
+                command.append(str(directory / f"{stage['name']}.sh"))
+                if args.dry_run:
+                    print(shlex.join(command))
+                    predecessor = f"<{key}>"
+                    continue
+                # Save intent first: interruption after sbatch must not silently duplicate work.
+                manifest["jobs"][key] = {"id": None, "submitted_at": datetime.now(timezone.utc).isoformat()}
+                save(root, manifest)
+                result = subprocess.run(command, capture_output=True, text=True, timeout=60)
+                if result.returncode:
+                    del manifest["jobs"][key]
+                    save(root, manifest)
+                    fail(f"Submission stopped at {key}: {result.stderr.strip()}")
+                job_id = result.stdout.strip().split(";")[0]
+                if not re.fullmatch(r"[0-9]+", job_id):
+                    fail(f"Unrecognized sbatch response at {key}; inspect scheduler before changing the saved submission intent.")
+                manifest["jobs"][key]["id"] = job_id
+                save(root, manifest)
+                predecessor = job_id
+                print(f"{key}: submitted {job_id}")
+
+
+def status(args):
+    root = Path(args.project).resolve()
+    manifest = load(root)
+    states = {} if args.offline else scheduler_states(manifest["jobs"])
+    print(f"{'REPLICA/STAGE':<32} {'JOB':<12} STATE")
+    for replica in selected(manifest, args.replica):
+        for stage in replica["stages"]:
+            key = replica["name"] + "/" + stage["name"]
+            job = manifest["jobs"].get(key)
+            state = "COMPLETE" if complete(root / replica["name"], stage) else (
+                states.get(job.get("id"), "RECORDED" if args.offline else "UNKNOWN") if job else "NOT_SUBMITTED")
+            print(f"{key:<32} {str(job.get('id') if job else '-'):<12} {state}")
+
+
+def reset(args):
+    root = Path(args.project).resolve()
+    with locked(root):
+        manifest = load(root)
+        targets, files = [], []
+        start = "md-0001" if args.from_stage == "production" else args.from_stage
+        if start.startswith("md-"):
+            try:
+                start = f"md-{positive(start[3:]):04d}"
+            except (ValueError, argparse.ArgumentTypeError):
+                fail("Use a production stage such as md-2.")
+        for replica in selected(manifest, args.replica):
+            stages = replica["stages"]
+            names = [stage["name"] for stage in stages]
+            if start not in names:
+                fail(f"{start} is not a stage in {replica['name']}.")
+            for stage in stages[names.index(start):]:
+                targets.append(replica["name"] + "/" + stage["name"])
+                files.extend(artifacts(root / replica["name"], stage))
+        jobs = {key: manifest["jobs"][key] for key in targets if key in manifest["jobs"]}
+        print("Reset stages:\n  " + "\n  ".join(targets))
+        print("Archive files:\n  " + ("\n  ".join(str(path.relative_to(root)) for path in files) or "(none)"))
+        print("Recorded jobs: " + (", ".join(str(job.get("id")) for job in jobs.values()) or "none"))
+        if not args.apply:
+            print("Preview only. Add --apply to archive outputs; --cancel also cancels active jobs.")
+            return
+        if any(not job.get("id") for job in jobs.values()):
+            fail("An interrupted submission has no job ID. Reconcile it in md-bud.json with Slurm before reset.")
+        states = scheduler_states(jobs)
+        unknown = [job["id"] for job in jobs.values() if job["id"] not in states]
+        if unknown:
+            fail("Cannot establish scheduler state for jobs: " + ", ".join(unknown))
+        active = [job["id"] for job in jobs.values() if states[job["id"]] not in TERMINAL]
+        if active and not args.cancel:
+            fail("Active jobs must stop before archiving. Use --cancel with --apply.")
+        if active:
+            run(["scancel", *active])
+            deadline = time.monotonic() + 30
+            while True:
+                states = scheduler_states(jobs)
+                if all(states.get(job_id) in TERMINAL for job_id in active):
+                    break
+                if time.monotonic() >= deadline:
+                    fail("Jobs have not stopped yet. No files moved; rerun reset once cancellation finishes.")
+                time.sleep(1)
+        archive_outputs(root, manifest, targets)
+
+
+def archive_outputs(root, manifest, targets):
+    # Lock stages as well as the manifest, including manually launched scripts.
+    with ExitStack() as stack:
+        for key in targets:
+            replica, name = key.split("/")
+            stream = stack.enter_context((root / replica / f".{name}.lock").open("a"))
+            try:
+                fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                fail(f"{key} is still running; no files moved.")
+        # Refresh after jobs stop: they may have written files during cancellation.
+        files = []
+        for replica in manifest["replicas"]:
+            for stage in replica["stages"]:
+                if replica["name"] + "/" + stage["name"] in targets:
+                    files.extend(artifacts(root / replica["name"], stage))
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
+        archive = root / "archive" / stamp
+        if (root / "archive").is_symlink():
+            fail("Archive directory cannot be a symlink.")
+        archive.mkdir(parents=True)
+        (archive / "md-bud-before-reset.json").write_text(json.dumps(manifest, indent=2) + "\n")
+        (archive / "reset.json").write_text(json.dumps({"stages": targets, "files": [str(p.relative_to(root)) for p in files]}, indent=2))
+        moved = []
+        try:
+            for path in files:
+                destination = archive / path.relative_to(root)
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                path.rename(destination)
+                moved.append((path, destination))
+            for key in targets:
+                manifest["jobs"].pop(key, None)
+            manifest["archives"].append(str(archive.relative_to(root)))
+            save(root, manifest)
+        except BaseException:
+            for path, destination in reversed(moved):
+                destination.rename(path)
+            raise
+        print(f"Archived {len(files)} files in {archive}. Inputs and earlier stages kept.")
+        print("Run md-bud submit to submit the reset stages.")
+
+
+def frames(args):
+    root = Path(args.project).resolve()
+    manifest = load(root)
+    config = manifest["config"]
+    expected = config["steps"] // config["ntwx"]
+    total, failed, count = 0, False, 0
+    for replica in selected(manifest, args.replica):
+        directory = root / replica["name"]
+        for stage in replica["stages"]:
+            if not stage["name"].startswith("md-"):
+                continue
+            name = stage["name"] + ".nc"
+            path = directory / name
+            if not path.is_file():
+                print(f"{replica['name']}/{name}: MISSING (expected {expected})")
+                failed = True
+                continue
+            # CPPTRAJ prints other numbers too; only its documented Frames: line counts.
+            command = ["cpptraj", "-p", "../inputs/topology.prmtop", "-y", name, "-tl"]
+            output = run(command, cwd=directory)
+            matches = re.findall(r"^\s*Frames:\s*(\d+)\s*$", output, re.MULTILINE)
+            if len(matches) != 1:
+                fail(f"Unrecognized CPPTRAJ frame count for {path}.")
+            measured = int(matches[0])
+            count += 1
+            total += measured
+            mismatch = measured != expected
+            failed |= mismatch
+            duration = measured * config["ntwx"] * config["dt"] / 1000
+            print(f"{replica['name']}/{name}: {measured}/{expected} frames, {duration:g} ns"
+                  + (" INCOMPLETE/UNEXPECTED" if mismatch else " OK"))
+    print(f"Total: {total} frames across {count} production trajectories; combined files excluded.")
+    return 1 if failed else 0
+
+
+def parser():
+    cli = argparse.ArgumentParser(description="md-bud: AMBER generation, replicas, Slurm jobs, safe resets and frame checks.")
+    cli.add_argument("--version", action="version", version=VERSION)
+    commands = cli.add_subparsers(dest="command", required=True)
+    gen = commands.add_parser("generate", help="Create a new campaign; never overwrite an existing directory")
+    gen.add_argument("--output", required=True, help="New campaign directory")
+    gen.add_argument("--topology", required=True, help="Prepared AMBER topology")
+    gen.add_argument("--coordinates", required=True, help="Initial coordinates; velocity-bearing restart for production-only")
+    gen.add_argument("--account", default=os.environ.get("SLURM_ACCOUNT"), help="Slurm allocation (default: SLURM_ACCOUNT)")
+    gen.add_argument("--workflow", choices=["all", "prep", "production"], default="all", help="all, min/heat/eq only, or production only")
+    gen.add_argument("--replicas", type=positive, default=1, help="Independent runs (default: 1)")
+    gen.add_argument("--segments", type=positive, default=1, help="Sequential production jobs per replica (default: 1)")
+    gen.add_argument("--ns", type=number, default=10, help="Nanoseconds per production segment (default: 10)")
+    gen.add_argument("--combine", action="store_true", help="Combine production trajectories separately for each replica")
+    gen.add_argument("--submit", action="store_true", help="Submit immediately after generation")
+    gen.add_argument("--temperature", type=number, default=310, help="Target temperature in K (default: 310)")
+    gen.add_argument("--ensemble", choices=["npt", "nvt"], default="npt", help="Periodic constant-pressure or constant-volume MD")
+    gen.add_argument("--pressure", type=number, default=1, help="Pressure in bar for NPT (default: 1)")
+    gen.add_argument("--dt", type=number, default=0.002, help="Production/equilibration timestep in ps (default: 0.002)")
+    gen.add_argument("--cutoff", type=number, default=10, help="Nonbonded cutoff in angstroms (default: 10)")
+    gen.add_argument("--restraint-mask", default="!(:WAT,Na+,Cl-)", help="AMBER preparation restraint mask")
+    gen.add_argument("--restraints", help="Optional production distance-restraint file; omitted by default")
+    gen.add_argument("--seed", type=positive, help="Base random seed; generated and saved when omitted")
+    for option, default, description in [("ntwx", 25000, "Trajectory interval"), ("ntpr", 50000, "Energy-log interval"),
+                                          ("ntwr", 50000, "Checkpoint interval")]:
+        gen.add_argument("--" + option, type=positive, default=default, help=f"{description} in steps (default: {default})")
+    gen.add_argument("--engine", choices=["cuda", "cpu"], default="cuda", help="Production engine (default: cuda); prep uses MPI CPU")
+    gen.add_argument("--gpu", default="gpu:1", help="Slurm GPU resource (default: gpu:1)")
+    gen.add_argument("--cpus", type=positive, default=1, help="MPI tasks for CPU production (default: 1)")
+    gen.add_argument("--prep-tasks", type=positive, default=24, help="MPI tasks for preparation (default: 24)")
+    gen.add_argument("--mem", default="4G", help="Total production/analysis memory (default: 4G)")
+    gen.add_argument("--prep-mem", default="24G", help="Total preparation memory (default: 24G)")
+    gen.add_argument("--walltime", default="0-03:00", help="Production walltime (default: 0-03:00)")
+    gen.add_argument("--prep-walltime", default="0-03:00", help="Walltime for each min/heat/eq job (default: 0-03:00)")
+    gen.add_argument("--analysis-walltime", default="0-01:30", help="Combination walltime (default: 0-01:30)")
+    gen.add_argument("--partition", help="Optional Slurm partition")
+    gen.add_argument("--modules", default=MODULES, help="Quoted module list; use an empty string to inherit the environment")
+    gen.add_argument("--mail", help="Optional notification email; none by default")
+    for name, help_text in [("submit", "Submit unsubmitted stages using afterok dependencies"),
+                            ("status", "Show completion and scheduler states"),
+                            ("reset", "Preview/archive a stage and all dependent stages"),
+                            ("frames", "Check production frame counts without moving files")]:
+        sub = commands.add_parser(name, help=help_text)
+        sub.add_argument("project", help="Campaign directory")
+        sub.add_argument("--replica", type=positive, help="Select one replica number (default: all)")
+        if name == "submit":
+            sub.add_argument("--dry-run", action="store_true", help="Print submission commands without submitting")
+        elif name == "status":
+            sub.add_argument("--offline", action="store_true", help="Inspect local files without Slurm")
+        elif name == "reset":
+            sub.add_argument("--from", dest="from_stage", required=True, help="min, heat, eq, production, md-N or combine")
+            sub.add_argument("--apply", action="store_true", help="Archive outputs and clear affected submission records")
+            sub.add_argument("--cancel", action="store_true", help="Cancel affected active jobs before archiving (requires --apply)")
+    return cli
+
+
+def main():
+    args = parser().parse_args()
+    try:
+        result = globals()[args.command](args)
+        return result or 0
+    except (ValueError, OSError, KeyError, json.JSONDecodeError, subprocess.TimeoutExpired) as error:
+        print(f"md-bud: {error}", file=sys.stderr)
+        return 2
+    except KeyboardInterrupt:
+        print("md-bud: interrupted; inspect recorded jobs before resubmission.", file=sys.stderr)
+        return 130
+
+
+if __name__ == "__main__":
+    sys.exit(main())

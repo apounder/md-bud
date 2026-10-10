@@ -1,0 +1,8 @@
+*.plx text eol=lf
+*.sh text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+md-bud text eol=lf
+LICENSE text eol=lf
+*.png binary
