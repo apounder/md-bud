@@ -1,4 +1,6 @@
-![md-bud banner](banner.png)
+<p align="center">
+  <img src="./banner.png" alt="md-bud banner" width="1200">
+</p>
 
 # md-bud
 
@@ -14,6 +16,77 @@ One script to generate and manage AMBER molecular dynamics jobs on Fir.
 Requires **Linux, Python 3.11+, Bash, and `flock`**. Generation works locally.
 Submission needs Slurm; simulation needs AMBER; frame checking needs CPPTRAJ.
 No Python packages need installing.
+
+## Before you use md-bud
+
+Set your own cluster settings using options. **You do not need to edit the
+`md-bud` script to change its defaults for a run.**
+
+| Check first | How to set it |
+| --- | --- |
+| Allocation account | `-A your-allocation`, or set `SLURM_ACCOUNT` once in your shell |
+| GPU | `--gpu RESOURCE`; default `gpu:1` requests a GPU without choosing a model |
+| Email | `--mail you@example.org`; omit it to leave notifications off |
+| Software modules | `--modules "MODULE LIST"`; choose versions available on Fir |
+| Memory | `--mem 4G` for production/analysis, `--prep-mem 24G` for preparation |
+| Time limits | `-w 0-03:00` for production; `--prep-walltime` and `--analysis-walltime` for other stages |
+| Partition | `--partition NAME` if your allocation requires one; otherwise let Slurm choose |
+| Starting files | `-p system.prmtop -s system.inpcrd`; use a restart with velocities for production-only |
+
+Use a GPU resource supported by your allocation. The original script requested
+`gpu:nvidia_h100_80gb_hbm3_3g.40gb:1`; you can select that with `--gpu` if it is
+available to you. Run `module spider amber-pmemd` and `module spider ambertools`
+on Fir to check software choices. Review the simulation settings for your system.
+
+For example, choose your settings when generating a campaign:
+
+```bash
+./md-bud generate -i runs/example -p system.prmtop -s system.inpcrd \
+  -A your-allocation --gpu gpu:1 --mail you@example.org \
+  --mem 4G -w 0-03:00 -R 3 -n 5 -t 10
+```
+
+Replace the account and email examples with your own values. Omit `--mail` if
+you do not want notifications. The other settings can be omitted when their
+defaults suit your run.
+
+### Save your usual settings locally
+
+To stop typing your account each time, add this to your own `~/.bashrc`:
+
+```bash
+export SLURM_ACCOUNT="your-allocation"
+```
+
+For other preferences, you can also add this Bash function to `~/.bashrc`.
+Replace `/absolute/path/to/md-bud` with the script's actual location and choose
+your GPU, memory, and email once:
+
+```bash
+mdbud_generate() {
+  /absolute/path/to/md-bud generate \
+    --gpu gpu:1 --mem 4G --mail you@example.org "$@"
+}
+```
+
+Remove `--mail you@example.org` from the function to leave notifications off.
+Add `--modules "YOUR MODULE LIST"` there if you use a different software stack.
+Reload your shell settings, then use the shorter command:
+
+```bash
+source ~/.bashrc
+mdbud_generate -i runs/water -p water.prmtop -s water.inpcrd -R 3 -n 5 -t 10
+```
+
+Options supplied to `mdbud_generate` override the function's settings: for
+example, add `--mem 8G` for a larger run or `-A another-allocation` for a different
+account. Only `SLURM_ACCOUNT` is read automatically by md-bud; GPU, email, and
+module preferences need command options or the function above.
+
+Settings are saved when the campaign is generated. Changing your shell settings
+later does not update existing batch scripts. Review the generated `.sh` files
+and run `./md-bud submit runs/example --dry-run` before your first submission.
+Keep your personal shell settings and generated campaigns out of the public repo.
 
 ## Start here
 
