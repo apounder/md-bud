@@ -19,9 +19,8 @@ No Python packages need installing.
 
 ```bash
 chmod +x md-bud
-./md-bud generate --output runs/example \
-  --topology system.prmtop --coordinates system.inpcrd \
-  --account your-allocation --replicas 3 --segments 5 --ns 10 --combine
+./md-bud generate -i runs/example -p system.prmtop -s system.inpcrd \
+  -A your-allocation -R 3 -n 5 -t 10 -w 0-03:00 -c
 
 ./md-bud submit runs/example --dry-run
 ./md-bud submit runs/example
@@ -41,30 +40,57 @@ Generation does not submit unless you add `--submit`. Review generated `.in`
 and `.sh` files before running them. Existing campaign directories are never
 replaced.
 
+## Most common options
+
+These are the usual options to choose for a run. Short flags and long names do
+the same thing; all existing long names still work.
+
+| Short flag | Long name | Meaning | Default |
+| --- | --- | --- | --- |
+| `-i NAME` | `--output`, `--prefix` | Campaign prefix: the directory holding all run files | Required |
+| `-p FILE` | `--topology` | AMBER `.prmtop` file | Required |
+| `-s FILE` | `--coordinates` | Starting coordinates or production restart | Required |
+| `-A NAME` | `--account` | Slurm allocation account | `SLURM_ACCOUNT`, otherwise required |
+| `-n N` | `--segments`, `--chunks` | Sequential production chunks per replica | `1` |
+| `-R N` | `--replicas` | Number of independent replicas | `1` |
+| `-t NS` | `--ns` | Simulated time per chunk, in nanoseconds | `10` |
+| `-w TIME` | `--walltime` | Maximum real runtime for each production job | `0-03:00` |
+| `-f MODE` | `--workflow` | `all`, `prep`, or `production` | `all` |
+| `-c` | `--combine` | Combine production chunks within each replica | Off |
+
+For example, `-R 3 -n 5 -t 10` requests three replicas with five 10 ns chunks
+each: **50 ns per replica**, or 150 ns across all replicas. `-w` controls cluster
+walltime separately from `-t`.
+
+`-n`, `-t`, `-w`, `-p`, and `-c` retain their original roles. `-i` now
+names the campaign directory instead of prefixing each individual filename:
+`-i water` puts predictable filenames inside `water/replica-001/`, etc.
+`-R` is new: in `generate` it sets the replica count; in `submit`, `status`,
+`reset`, and `frames` it selects a single replica number.
+
 ## Choose what to generate
 
 ```bash
 # Minimization, heating, and equilibration only
-./md-bud generate --output runs/prep --topology system.prmtop \
-  --coordinates system.inpcrd --account your-allocation --workflow prep
+./md-bud generate -i runs/prep -p system.prmtop \
+  -s system.inpcrd -A your-allocation -f prep
 
 # Production from an existing restart containing velocities and box information
-./md-bud generate --output runs/production --topology system.prmtop \
-  --coordinates equilibrated.rst7 --account your-allocation \
-  --workflow production --replicas 3 --segments 5
+./md-bud generate -i runs/production -p system.prmtop \
+  -s equilibrated.rst7 -A your-allocation -f production -R 3 -n 5
 ```
 
 ## Reset and keep old data
 
 ```bash
 # Preview: replica 2, segment 3 and everything after it
-./md-bud reset runs/example --replica 2 --from md-3
+./md-bud reset runs/example -R 2 --from md-3
 
 # Apply: cancel affected active jobs, wait for them to stop, then archive
-./md-bud reset runs/example --replica 2 --from md-3 --apply --cancel
+./md-bud reset runs/example -R 2 --from md-3 --apply --cancel
 
 # Submit the reset stages again
-./md-bud submit runs/example --replica 2
+./md-bud submit runs/example -R 2
 ```
 
 Reset keeps inputs, earlier stages, and other replicas. Old outputs, logs,

@@ -108,6 +108,24 @@ class CampaignTests(unittest.TestCase):
         self.cli("generate", "--help")
         self.assertFalse(self.project.exists())
 
+    def test_common_short_flags_match_long_options(self):
+        self.generate("--walltime", "0-01:00")
+        short_project = self.root / "short prefix"
+        self.cli("generate", "-i", short_project, "-p", self.topology, "-s", self.coordinates,
+                 "-A", "test-account", "-R", "2", "-n", "2", "-t", "0.02",
+                 "-w", "0-01:00", "-f", "all", "-c", "--ntwx", "2500", "--seed", "123")
+        short = json.loads((short_project / "md-bud.json").read_text())
+        self.assertEqual(self.manifest(), short)
+        self.cli("submit", short_project, "-R", "2", "--dry-run")
+        self.cli("status", short_project, "-R", "2", "--offline")
+        self.cli("reset", short_project, "-R", "2", "--from", "md-2")
+
+    def test_prefix_and_chunks_long_aliases(self):
+        self.cli("generate", "--prefix", self.project, "-p", self.topology, "-s", self.coordinates,
+                 "-A", "test-account", "--chunks", "3", "-f", "production")
+        self.assertEqual(self.manifest()["config"]["segments"], 3)
+        self.assertEqual(len(self.manifest()["replicas"][0]["stages"]), 3)
+
     def test_generation_and_bash_syntax(self):
         self.generate()
         data = self.manifest()
