@@ -1,0 +1,7 @@
+replica	analysis	section	series	unit	status	n	g_estimate	effective_samples_estimate	sem_under_stationarity	suggested_block_frames	second_minus_first_half_mean	lag_limit_reached	configured_block_shorter_than_suggestion
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	estimate_requires_stationarity	300	44.62050564272812	6.723366211984904	0.04982353264020566	224	0.1242399513333338	False	True
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	estimate_requires_stationarity	300	51.70515168559374	5.80212977275893	0.05995445775890292	259	0.06981321999999884	False	True
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	estimate_requires_stationarity	240	57.52637069345744	4.1719996778328925	0.0723678814058518	288	0.160592015	False	True
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	estimate_requires_stationarity	240	58.03012147152161	4.13578317456703	0.06960076737126676	291	0.12271734999999838	False	True
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	estimate_requires_stationarity	360	48.00247594616937	7.499613153365441	0.0660115945172851	241	0.13176453444444416	False	True
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	estimate_requires_stationarity	360	54.41953114694266	6.61527198806499	0.054586497345659776	273	0.00435193333333735	False	True

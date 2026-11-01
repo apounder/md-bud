@@ -1,15 +1,26 @@
-name: Tests
+name: MD-bud offline tests
 on: [push, pull_request]
 permissions:
   contents: read
 jobs:
-  offline-tests:
-    runs-on: ubuntu-latest
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.12']
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Run offline integration tests
-        run: |
-          chmod +x md-bud
-          python3 -m unittest discover -s tests -v
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install ".[dev]"
+      - if: runner.os == 'Linux'
+        run: chmod +x md-bud
+      - run: python -m unittest discover -s tests -v
+      - run: python -m build
+      - run: python tools/build_zipapp.py
+      - run: python dist/md-bud.pyz --version
+      - run: md-bud doctor --task generation

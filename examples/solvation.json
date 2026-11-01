@@ -1,0 +1,12 @@
+{
+  "topology": "../data/system.prmtop",
+  "replicas": [{"name": "rep01", "trajectories": ["../data/rep01.nc"]}],
+  "output": "../solvation_results",
+  "imaging": {"mode": "on"},
+  "analysis": {"level": "basic", "additional": ["rdf", "watershell"]},
+  "solvation": [
+    {"name": "site_water_rdf", "type": "rdf", "mask1": ":25@OD1", "mask2": ":WAT@O", "spacing": 0.1, "maximum": 8.0},
+    {"name": "site_water_shells", "type": "watershell", "mask1": ":25", "mask2": ":WAT", "lower": 3.4, "upper": 5.0}
+  ],
+  "notes": "Illustrative atom/residue names only: adapt to your topology and verify RDF radius against every periodic cell. Solvent masks must be disjoint from the solute."
+}

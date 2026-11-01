@@ -1,0 +1,18 @@
+{
+  "topology": "data/system.prmtop",
+  "replicas": [
+    {"name": "rep01", "trajectories": ["data/rep01/part1.nc", "data/rep01/part2.nc"]},
+    {"name": "rep02", "trajectories": ["data/rep02/part1.nc"]}
+  ],
+  "output": "geometry_results",
+  "analysis": {"level": "standard", "additional": ["angle", "dihedral"]},
+  "sections": [{"name": "backbone", "mask": "backbone"}],
+  "fit_mask": "backbone",
+  "frames": {"start": 1, "stop": -1, "stride": 1, "dt_ps": null},
+  "monitors": [
+    {"name": "gate_distance", "type": "distance", "masks": [":25@CA", ":80@CA"], "center": "mass", "image": true},
+    {"name": "hinge_angle", "type": "angle", "masks": [":10@CA", ":40@CA", ":90@CA"], "center": "geometry"},
+    {"name": "phi25", "type": "dihedral", "masks": [":24@C", ":25@N", ":25@CA", ":25@C"], "center": "geometry", "range360": false}
+  ],
+  "progress": {"enabled": true}
+}

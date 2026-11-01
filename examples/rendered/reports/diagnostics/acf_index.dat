@@ -1,0 +1,7 @@
+replica	analysis	section	series	path	lag_unit
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	reports\diagnostics\acf_73f6c87cd7205854.dat	time (ns)
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	reports\diagnostics\acf_ec532eae4b15e062.dat	time (ns)
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	reports\diagnostics\acf_5c6b9ab22c6cc0bc.dat	time (ns)
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	reports\diagnostics\acf_5fe6de4d32ae92eb.dat	time (ns)
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	reports\diagnostics\acf_1191617a9892b272.dat	time (ns)
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	reports\diagnostics\acf_bcec109093e6da93.dat	time (ns)

@@ -1,0 +1,301 @@
+replica	analysis	section	series	unit	bin_left	bin_right	count	n_finite	probability	probability_density	geometry
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.3177925	1.344027344	2	300	0.006666666667	0.2541149751	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.344027344	1.370262187	1	300	0.003333333333	0.1270574876	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.370262187	1.396497031	4	300	0.01333333333	0.5082299502	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.396497031	1.422731875	3	300	0.01	0.3811724627	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.422731875	1.448966719	7	300	0.02333333333	0.8894024129	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.448966719	1.475201562	10	300	0.03333333333	1.270574876	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.475201562	1.501436406	26	300	0.08666666667	3.303494676	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.501436406	1.52767125	18	300	0.06	2.287034776	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.52767125	1.553906094	25	300	0.08333333333	3.176437189	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.553906094	1.580140937	19	300	0.06333333333	2.414092264	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.580140937	1.606375781	16	300	0.05333333333	2.032919801	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.606375781	1.632610625	21	300	0.07	2.668207239	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.632610625	1.658845469	25	300	0.08333333333	3.176437189	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.658845469	1.685080312	18	300	0.06	2.287034776	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.685080312	1.711315156	11	300	0.03666666667	1.397632363	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.711315156	1.73755	3	300	0.01	0.3811724627	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.73755	1.763784844	16	300	0.05333333333	2.032919801	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.763784844	1.790019688	24	300	0.08	3.049379701	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.790019688	1.816254531	23	300	0.07666666667	2.922322214	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.816254531	1.842489375	21	300	0.07	2.668207239	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.842489375	1.868724219	5	300	0.01666666667	0.6352874378	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.868724219	1.894959062	2	300	0.006666666667	0.2541149751	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.894959062	1.921193906	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.921193906	1.94742875	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.94742875	1.973663594	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.973663594	1.999898437	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.999898437	2.026133281	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.026133281	2.052368125	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.052368125	2.078602969	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.078602969	2.104837813	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.104837813	2.131072656	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.131072656	2.1573075	0	300	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.3177925	1.344027344	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.344027344	1.370262187	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.370262187	1.396497031	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.396497031	1.422731875	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.422731875	1.448966719	4	240	0.01666666667	0.6352874378	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.448966719	1.475201562	3	240	0.0125	0.4764655783	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.475201562	1.501436406	20	240	0.08333333333	3.176437189	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.501436406	1.52767125	19	240	0.07916666667	3.017615329	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.52767125	1.553906094	22	240	0.09166666667	3.494080908	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.553906094	1.580140937	7	240	0.02916666667	1.111753016	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.580140937	1.606375781	3	240	0.0125	0.4764655783	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.606375781	1.632610625	9	240	0.0375	1.429396735	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.632610625	1.658845469	10	240	0.04166666667	1.588218594	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.658845469	1.685080312	8	240	0.03333333333	1.270574876	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.685080312	1.711315156	12	240	0.05	1.905862313	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.711315156	1.73755	22	240	0.09166666667	3.494080908	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.73755	1.763784844	15	240	0.0625	2.382327892	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.763784844	1.790019688	11	240	0.04583333333	1.747040454	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.790019688	1.816254531	13	240	0.05416666667	2.064684173	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.816254531	1.842489375	15	240	0.0625	2.382327892	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.842489375	1.868724219	12	240	0.05	1.905862313	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.868724219	1.894959062	10	240	0.04166666667	1.588218594	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.894959062	1.921193906	12	240	0.05	1.905862313	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.921193906	1.94742875	8	240	0.03333333333	1.270574876	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.94742875	1.973663594	4	240	0.01666666667	0.6352874378	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.973663594	1.999898437	1	240	0.004166666667	0.1588218594	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.999898437	2.026133281	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.026133281	2.052368125	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.052368125	2.078602969	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.078602969	2.104837813	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.104837813	2.131072656	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.131072656	2.1573075	0	240	0	0	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.3177925	1.344027344	0	360	0	0	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.344027344	1.370262187	1	360	0.002777777778	0.1058812396	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.370262187	1.396497031	5	360	0.01388888889	0.5294061982	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.396497031	1.422731875	5	360	0.01388888889	0.5294061982	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.422731875	1.448966719	11	360	0.03055555556	1.164693636	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.448966719	1.475201562	7	360	0.01944444444	0.7411686774	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.475201562	1.501436406	5	360	0.01388888889	0.5294061982	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.501436406	1.52767125	7	360	0.01944444444	0.7411686774	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.52767125	1.553906094	2	360	0.005555555556	0.2117624793	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.553906094	1.580140937	0	360	0	0	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.580140937	1.606375781	1	360	0.002777777778	0.1058812396	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.606375781	1.632610625	1	360	0.002777777778	0.1058812396	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.632610625	1.658845469	4	360	0.01111111111	0.4235249585	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.658845469	1.685080312	2	360	0.005555555556	0.2117624793	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.685080312	1.711315156	19	360	0.05277777778	2.011743553	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.711315156	1.73755	30	360	0.08333333333	3.176437189	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.73755	1.763784844	18	360	0.05	1.905862313	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.763784844	1.790019688	29	360	0.08055555556	3.070555949	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.790019688	1.816254531	20	360	0.05555555556	2.117624793	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.816254531	1.842489375	20	360	0.05555555556	2.117624793	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.842489375	1.868724219	22	360	0.06111111111	2.329387272	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.868724219	1.894959062	9	360	0.025	0.9529311567	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.894959062	1.921193906	9	360	0.025	0.9529311567	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.921193906	1.94742875	28	360	0.07777777778	2.96467471	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.94742875	1.973663594	26	360	0.07222222222	2.75291223	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.973663594	1.999898437	21	360	0.05833333333	2.223506032	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	1.999898437	2.026133281	19	360	0.05277777778	2.011743553	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.026133281	2.052368125	13	360	0.03611111111	1.376456115	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.052368125	2.078602969	8	360	0.02222222222	0.847049917	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.078602969	2.104837813	7	360	0.01944444444	0.7411686774	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.104837813	2.131072656	8	360	0.02222222222	0.847049917	linear
+SYNTHETIC_replica_3	SYNTHETIC RMSD	protein backbone	RMSD	angstrom	2.131072656	2.1573075	3	360	0.008333333333	0.3176437189	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.797279	17.81479194	4	300	0.01333333333	0.7613419127	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.81479194	17.83230487	15	300	0.05	2.855032173	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.83230487	17.84981781	14	300	0.04666666667	2.664696694	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.84981781	17.86733075	21	300	0.07	3.997045042	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.86733075	17.88484369	13	300	0.04333333333	2.474361216	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.88484369	17.90235662	17	300	0.05666666667	3.235703129	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.90235662	17.91986956	10	300	0.03333333333	1.903354782	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.91986956	17.9373825	10	300	0.03333333333	1.903354782	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.9373825	17.95489544	8	300	0.02666666667	1.522683825	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.95489544	17.97240838	11	300	0.03666666667	2.09369026	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.97240838	17.98992131	6	300	0.02	1.142012869	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.98992131	18.00743425	10	300	0.03333333333	1.903354782	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.00743425	18.02494719	9	300	0.03	1.713019304	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.02494719	18.04246013	4	300	0.01333333333	0.7613419127	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.04246013	18.05997306	10	300	0.03333333333	1.903354782	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.05997306	18.077486	7	300	0.02333333333	1.332348347	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.077486	18.09499894	10	300	0.03333333333	1.903354782	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.09499894	18.11251187	9	300	0.03	1.713019304	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.11251187	18.13002481	7	300	0.02333333333	1.332348347	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.13002481	18.14753775	13	300	0.04333333333	2.474361216	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.14753775	18.16505069	7	300	0.02333333333	1.332348347	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.16505069	18.18256363	16	300	0.05333333333	3.045367651	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.18256363	18.20007656	17	300	0.05666666667	3.235703129	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.20007656	18.2175895	17	300	0.05666666667	3.235703129	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.2175895	18.23510244	13	300	0.04333333333	2.474361216	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.23510244	18.25261538	16	300	0.05333333333	3.045367651	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.25261538	18.27012831	5	300	0.01666666667	0.9516773909	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.27012831	18.28764125	1	300	0.003333333333	0.1903354782	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.28764125	18.30515419	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.30515419	18.32266713	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.32266713	18.34018006	0	300	0	0	linear
+SYNTHETIC_replica_1	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.34018006	18.357693	0	300	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.797279	17.81479194	0	240	0	0	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.81479194	17.83230487	1	240	0.004166666667	0.2379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.83230487	17.84981781	1	240	0.004166666667	0.2379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.84981781	17.86733075	6	240	0.025	1.427516086	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.86733075	17.88484369	12	240	0.05	2.855032173	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.88484369	17.90235662	8	240	0.03333333333	1.903354782	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.90235662	17.91986956	10	240	0.04166666667	2.379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.91986956	17.9373825	10	240	0.04166666667	2.379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.9373825	17.95489544	4	240	0.01666666667	0.9516773909	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.95489544	17.97240838	10	240	0.04166666667	2.379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.97240838	17.98992131	4	240	0.01666666667	0.9516773909	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.98992131	18.00743425	9	240	0.0375	2.141274129	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.00743425	18.02494719	7	240	0.02916666667	1.665435434	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.02494719	18.04246013	6	240	0.025	1.427516086	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.04246013	18.05997306	3	240	0.0125	0.7137580432	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.05997306	18.077486	5	240	0.02083333333	1.189596739	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.077486	18.09499894	6	240	0.025	1.427516086	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.09499894	18.11251187	7	240	0.02916666667	1.665435434	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.11251187	18.13002481	9	240	0.0375	2.141274129	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.13002481	18.14753775	8	240	0.03333333333	1.903354782	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.14753775	18.16505069	10	240	0.04166666667	2.379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.16505069	18.18256363	10	240	0.04166666667	2.379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.18256363	18.20007656	10	240	0.04166666667	2.379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.20007656	18.2175895	13	240	0.05416666667	3.09295152	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.2175895	18.23510244	14	240	0.05833333333	3.330870868	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.23510244	18.25261538	14	240	0.05833333333	3.330870868	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.25261538	18.27012831	23	240	0.09583333333	5.472144998	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.27012831	18.28764125	12	240	0.05	2.855032173	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.28764125	18.30515419	6	240	0.025	1.427516086	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.30515419	18.32266713	1	240	0.004166666667	0.2379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.32266713	18.34018006	1	240	0.004166666667	0.2379193477	linear
+SYNTHETIC_replica_2	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.34018006	18.357693	0	240	0	0	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.797279	17.81479194	0	360	0	0	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.81479194	17.83230487	0	360	0	0	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.83230487	17.84981781	0	360	0	0	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.84981781	17.86733075	0	360	0	0	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.86733075	17.88484369	2	360	0.005555555556	0.317225797	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.88484369	17.90235662	8	360	0.02222222222	1.268903188	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.90235662	17.91986956	16	360	0.04444444444	2.537806376	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.91986956	17.9373825	23	360	0.06388888889	3.648096665	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.9373825	17.95489544	19	360	0.05277777778	3.013645071	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.95489544	17.97240838	18	360	0.05	2.855032173	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.97240838	17.98992131	27	360	0.075	4.282548259	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	17.98992131	18.00743425	11	360	0.03055555556	1.744741883	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.00743425	18.02494719	8	360	0.02222222222	1.268903188	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.02494719	18.04246013	15	360	0.04166666667	2.379193477	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.04246013	18.05997306	9	360	0.025	1.427516086	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.05997306	18.077486	16	360	0.04444444444	2.537806376	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.077486	18.09499894	6	360	0.01666666667	0.9516773909	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.09499894	18.11251187	12	360	0.03333333333	1.903354782	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.11251187	18.13002481	14	360	0.03888888889	2.220580579	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.13002481	18.14753775	8	360	0.02222222222	1.268903188	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.14753775	18.16505069	10	360	0.02777777778	1.586128985	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.16505069	18.18256363	11	360	0.03055555556	1.744741883	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.18256363	18.20007656	13	360	0.03611111111	2.06196768	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.20007656	18.2175895	12	360	0.03333333333	1.903354782	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.2175895	18.23510244	10	360	0.02777777778	1.586128985	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.23510244	18.25261538	13	360	0.03611111111	2.06196768	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.25261538	18.27012831	15	360	0.04166666667	2.379193477	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.27012831	18.28764125	14	360	0.03888888889	2.220580579	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.28764125	18.30515419	13	360	0.03611111111	2.06196768	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.30515419	18.32266713	23	360	0.06388888889	3.648096665	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.32266713	18.34018006	11	360	0.03055555556	1.744741883	linear
+SYNTHETIC_replica_3	SYNTHETIC radius of gyration	protein	Rg	angstrom	18.34018006	18.357693	3	360	0.008333333333	0.4758386954	linear
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-180	-170	106	300	0.3533333333	0.03533333333	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-170	-160	3	300	0.01	0.001	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-160	-150	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-150	-140	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-140	-130	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-130	-120	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-120	-110	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-110	-100	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-100	-90	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-90	-80	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-80	-70	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-70	-60	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-60	-50	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-50	-40	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-40	-30	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-30	-20	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-20	-10	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-10	0	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	0	10	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	10	20	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	20	30	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	30	40	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	40	50	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	50	60	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	60	70	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	70	80	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	80	90	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	90	100	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	100	110	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	110	120	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	120	130	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	130	140	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	140	150	0	300	0	0	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	150	160	2	300	0.006666666667	0.0006666666667	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	160	170	109	300	0.3633333333	0.03633333333	circular
+SYNTHETIC_replica_1	SYNTHETIC torsion	protein residue 12	Phi_12	degree	170	180	80	300	0.2666666667	0.02666666667	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-180	-170	84	240	0.35	0.035	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-170	-160	1	240	0.004166666667	0.0004166666667	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-160	-150	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-150	-140	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-140	-130	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-130	-120	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-120	-110	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-110	-100	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-100	-90	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-90	-80	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-80	-70	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-70	-60	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-60	-50	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-50	-40	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-40	-30	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-30	-20	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-20	-10	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-10	0	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	0	10	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	10	20	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	20	30	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	30	40	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	40	50	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	50	60	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	60	70	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	70	80	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	80	90	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	90	100	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	100	110	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	110	120	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	120	130	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	130	140	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	140	150	0	240	0	0	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	150	160	1	240	0.004166666667	0.0004166666667	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	160	170	84	240	0.35	0.035	circular
+SYNTHETIC_replica_2	SYNTHETIC torsion	protein residue 12	Phi_12	degree	170	180	70	240	0.2916666667	0.02916666667	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-180	-170	101	360	0.2805555556	0.02805555556	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-170	-160	1	360	0.002777777778	0.0002777777778	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-160	-150	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-150	-140	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-140	-130	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-130	-120	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-120	-110	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-110	-100	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-100	-90	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-90	-80	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-80	-70	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-70	-60	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-60	-50	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-50	-40	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-40	-30	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-30	-20	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-20	-10	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	-10	0	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	0	10	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	10	20	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	20	30	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	30	40	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	40	50	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	50	60	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	60	70	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	70	80	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	80	90	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	90	100	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	100	110	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	110	120	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	120	130	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	130	140	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	140	150	0	360	0	0	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	150	160	2	360	0.005555555556	0.0005555555556	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	160	170	151	360	0.4194444444	0.04194444444	circular
+SYNTHETIC_replica_3	SYNTHETIC torsion	protein residue 12	Phi_12	degree	170	180	105	360	0.2916666667	0.02916666667	circular

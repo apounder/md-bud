@@ -1,0 +1,7 @@
+include LICENSE CITATION.md THIRD_PARTY.md CHANGELOG.md CONTRIBUTING.md md-bud mdworkbench.py
+recursive-include docs *.md
+recursive-include examples *.md *.json *.py *.pdb *.html *.dat
+recursive-include mdwb *.html *.js *.txt *.json
+recursive-include tests *.py
+recursive-include tools *.py
+global-exclude *.pyc

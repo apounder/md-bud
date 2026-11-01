@@ -1,0 +1,10 @@
+replica	analysis	section	series	state	count	n_finite	fraction
+SYNTHETIC_replica_1	SYNTHETIC categorical states	synthetic residue 12	State_12	0	119	300	0.3966666667
+SYNTHETIC_replica_1	SYNTHETIC categorical states	synthetic residue 12	State_12	1	101	300	0.3366666667
+SYNTHETIC_replica_1	SYNTHETIC categorical states	synthetic residue 12	State_12	2	80	300	0.2666666667
+SYNTHETIC_replica_2	SYNTHETIC categorical states	synthetic residue 12	State_12	0	89	240	0.3708333333
+SYNTHETIC_replica_2	SYNTHETIC categorical states	synthetic residue 12	State_12	1	90	240	0.375
+SYNTHETIC_replica_2	SYNTHETIC categorical states	synthetic residue 12	State_12	2	61	240	0.2541666667
+SYNTHETIC_replica_3	SYNTHETIC categorical states	synthetic residue 12	State_12	0	149	360	0.4138888889
+SYNTHETIC_replica_3	SYNTHETIC categorical states	synthetic residue 12	State_12	1	111	360	0.3083333333
+SYNTHETIC_replica_3	SYNTHETIC categorical states	synthetic residue 12	State_12	2	100	360	0.2777777778

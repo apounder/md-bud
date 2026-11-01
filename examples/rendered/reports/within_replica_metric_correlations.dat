@@ -1,0 +1,4 @@
+replica	metric_a	metric_b	paired_frames	descriptive_pearson_r
+SYNTHETIC_replica_1	SYNTHETIC RMSD/protein backbone/RMSD	SYNTHETIC radius of gyration/protein/Rg	300	-0.1741593271
+SYNTHETIC_replica_2	SYNTHETIC RMSD/protein backbone/RMSD	SYNTHETIC radius of gyration/protein/Rg	240	-0.3627561838
+SYNTHETIC_replica_3	SYNTHETIC RMSD/protein backbone/RMSD	SYNTHETIC radius of gyration/protein/Rg	360	-0.4119451658

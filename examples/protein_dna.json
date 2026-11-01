@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "notes": "Illustrative protein-DNA comparison. Replace paths and verify reference atom identity/order. Three independent replicas, each with two ordered chunks. Stride applies across each replica's joined chunks. Review protein alignment for the scientific question.",
+  "topology": "../data/protein_dna/complex.prmtop",
+  "replicas": [
+    {"name": "rep01", "trajectories": ["../data/protein_dna/rep01/production1.nc", "../data/protein_dna/rep01/production2.nc"]},
+    {"name": "rep02", "trajectories": ["../data/protein_dna/rep02/production1.nc", "../data/protein_dna/rep02/production2.nc"]},
+    {"name": "rep03", "trajectories": ["../data/protein_dna/rep03/production1.nc", "../data/protein_dna/rep03/production2.nc"]}
+  ],
+  "output": "../results/protein_dna_advanced",
+  "cpptraj": "cpptraj",
+  "reference": "../data/protein_dna/reference.rst7",
+  "fit_mask": "ca",
+  "imaging": {"mode": "auto", "anchor": null},
+  "frames": {"start": 1, "stop": -1, "stride": 10, "dt_ps": null},
+  "sections": [
+    {"name": "complex", "mask": "complex"},
+    {"name": "backbone", "mask": "backbone"},
+    {"name": "dna", "mask": "dna"},
+    {"name": "dna_backbone", "mask": "nucleic_backbone"},
+    {"name": "dna_bases", "mask": "bases"}
+  ],
+  "interactions": [
+    {"name": "protein_dna", "mask1": "protein", "mask2": "dna", "contact_cutoff": 4.5}
+  ],
+  "nucleic": {"resrange": null, "resmap": {}},
+  "analysis": {"level": "advanced"},
+  "advanced": {
+    "matrix_mask": "representative",
+    "pca_modes": 3,
+    "cluster_count": 5,
+    "cluster_sieve": 10,
+    "pairwise_rmsd": false,
+    "max_frames": 20000,
+    "max_matrix_atoms": 2000,
+    "max_memory_gb": 4.0
+  },
+  "stats": {"block_size": 50},
+  "plots": {"dpi": 600, "alpha": 0.75}
+}

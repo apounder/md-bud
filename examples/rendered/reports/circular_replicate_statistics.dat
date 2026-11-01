@@ -1,0 +1,2 @@
+analysis	section	series	n_replicas	equal_replica_circular_mean_degree	between_replica_resultant_length	between_replica_circular_sd_degree
+SYNTHETIC torsion	protein residue 12	Phi_12	3	174.6559791	0.9999359128	0.6486795334

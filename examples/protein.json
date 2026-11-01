@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "notes": "Illustrative paths only: replace these with matching topology/trajectory paths. Each replica contains ordered continuation segments. Time spacing is unknown until you supply dt_ps.",
+  "topology": "../data/protein/system.prmtop",
+  "replicas": [
+    {"name": "rep01", "trajectories": ["../data/protein/rep01/production1.nc", "../data/protein/rep01/production2.nc"]},
+    {"name": "rep02", "trajectories": ["../data/protein/rep02/production1.nc", "../data/protein/rep02/production2.nc"]}
+  ],
+  "output": "../results/protein_standard",
+  "cpptraj": "cpptraj",
+  "reference": null,
+  "fit_mask": "ca",
+  "imaging": {"mode": "auto", "anchor": null},
+  "frames": {"start": 1, "stop": -1, "stride": 1, "dt_ps": null},
+  "sections": [
+    {"name": "protein", "mask": "protein"},
+    {"name": "backbone", "mask": "backbone"},
+    {"name": "ca", "mask": "ca"}
+  ],
+  "analysis": {"level": "standard"},
+  "stats": {"block_size": 50},
+  "plots": {"dpi": 300, "alpha": 0.8}
+}

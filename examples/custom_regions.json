@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "notes": "Illustrative PSF/DCD protein system: replace all paths and residue ranges. Automatic residue classification is unavailable for PSF, so fit/sections/matrix masks are explicit. Imaging is explicitly on because this example assumes unit-cell data; change to off for a nonperiodic trajectory. Residues are topology indices.",
+  "topology": "../data/custom/system.psf",
+  "replicas": [
+    {"name": "rep01", "trajectories": ["../data/custom/rep01/segment1.dcd", "../data/custom/rep01/segment2.dcd"]},
+    {"name": "rep02", "trajectories": ["../data/custom/rep02/segment1.dcd", "../data/custom/rep02/segment2.dcd"]}
+  ],
+  "output": "../results/custom_regions",
+  "cpptraj": "cpptraj",
+  "reference": null,
+  "fit_mask": ":1-85@N,CA,C,O",
+  "imaging": {"mode": "on", "anchor": ":1-85"},
+  "frames": {"start": 1, "stop": -1, "stride": 1, "dt_ps": null},
+  "sections": [
+    {"name": "core", "mask": ":1-85@N,CA,C,O"},
+    {"name": "lid", "mask": ":86-120&!@/H"},
+    {"name": "tail", "mask": ":121-150@CA"}
+  ],
+  "interactions": [
+    {"name": "core_lid", "mask1": ":1-85", "mask2": ":86-120", "contact_cutoff": 4.5}
+  ],
+  "analysis": {"level": "standard", "enabled": ["rmsd", "rg", "rmsf", "distance", "contacts", "hbond", "dccm"]},
+  "advanced": {"matrix_mask": ":1-150@CA", "max_frames": 20000, "max_matrix_atoms": 2000, "max_memory_gb": 4.0},
+  "stats": {"block_size": 50},
+  "plots": {"dpi": 300, "alpha": 0.8}
+}

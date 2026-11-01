@@ -1,8 +1,9 @@
-*.plx text eol=lf
-*.sh text eol=lf
-*.md text eol=lf
-*.py text eol=lf
-*.yml text eol=lf
+* text=auto
 md-bud text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.plx text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
 LICENSE text eol=lf
 *.png binary

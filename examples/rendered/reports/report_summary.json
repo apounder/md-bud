@@ -1,0 +1,38 @@
+{
+  "status": "complete",
+  "plots_status": "disabled",
+  "replicas_requested": 3,
+  "replicas_with_numeric_data": 3,
+  "pooled_groups_requested": 0,
+  "series_count": 15,
+  "matrix_count": 3,
+  "figures": [],
+  "combined_data": "reports/all_replicas.dat",
+  "warnings": [],
+  "notes": [
+    "Trajectory-frame SD, quantiles, histograms and running averages are descriptive, not uncertainty estimates.",
+    "Between-replica SD describes the spread of replica means; each available replica receives equal weight. One replica has no between-replica SD.",
+    "Angles flagged circular use circular means and resultant lengths, with means undefined when the resultant is zero. They are excluded from arithmetic means and ordinary Pearson correlations.",
+    "Block-mean SD uses complete contiguous blocks of the requested analyzed-frame size; it is not an effective sample-size estimate or a confidence interval. Choose blocks longer than the observable correlation time.",
+    "Independent replicas are appended only for visualization, with boundary markers; the appended axis is not a continuous physical trajectory.",
+    "Matrix and profile means require matching axes and shapes. Matrix cell means require finite values from every included replica.",
+    "Matrix index compatibility does not independently establish identical atom identities or alignment; consistent selection, topology and reference setup are required.",
+    "Replica groups with different lengths are overlaid on their own coordinates. Missing observations are not interpolated.",
+    "Unknown table formats are retained as original artifacts and indexed. Numeric generic tables are exported by row without assigning physical meaning.",
+    "POOLED entries label shared analysis outputs, not additional independent replicas. Pooled PCA covariance weights frames; longer replicas contribute more to the common basis. PCA scatterplots use reported projection coordinates without inferring explained variance or free energy.",
+    "DSSP integer states are categories. Their fractions are reported; arithmetic means of state IDs are not calculated."
+  ],
+  "diagnostics": {
+    "enabled": true,
+    "sampling_rows": 6,
+    "acf_files": 6,
+    "distribution_comparisons": 12,
+    "distribution_omissions": 0
+  },
+  "figure_style": null,
+  "figure_analyses": {},
+  "figure_titles": {},
+  "viewer": "index.html",
+  "synthetic": true,
+  "description": "SYNTHETIC demonstration; no molecular dynamics or cpptraj execution"
+}

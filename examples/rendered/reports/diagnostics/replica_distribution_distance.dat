@@ -1,0 +1,13 @@
+analysis	section	series	replica_a	replica_b	n_a	n_b	js_distance_base2	bins_or_states	binning	distribution_file
+SYNTHETIC RMSD	protein backbone	RMSD	SYNTHETIC_replica_1	SYNTHETIC_replica_2	300	240	0.38663275585691254	32	shared_linear_bins	reports\diagnostics\distribution_ebe8d9ec58b5f825.dat
+SYNTHETIC RMSD	protein backbone	RMSD	SYNTHETIC_replica_1	SYNTHETIC_replica_3	300	360	0.6500964537693195	32	shared_linear_bins	reports\diagnostics\distribution_ebe8d9ec58b5f825.dat
+SYNTHETIC RMSD	protein backbone	RMSD	SYNTHETIC_replica_2	SYNTHETIC_replica_3	240	360	0.5090639508840651	32	shared_linear_bins	reports\diagnostics\distribution_ebe8d9ec58b5f825.dat
+SYNTHETIC radius of gyration	protein	Rg	SYNTHETIC_replica_1	SYNTHETIC_replica_2	300	240	0.3436192188212745	32	shared_linear_bins	reports\diagnostics\distribution_2d6db8f8626ab439.dat
+SYNTHETIC radius of gyration	protein	Rg	SYNTHETIC_replica_1	SYNTHETIC_replica_3	300	360	0.4873245763224243	32	shared_linear_bins	reports\diagnostics\distribution_2d6db8f8626ab439.dat
+SYNTHETIC radius of gyration	protein	Rg	SYNTHETIC_replica_2	SYNTHETIC_replica_3	240	360	0.34325922934865055	32	shared_linear_bins	reports\diagnostics\distribution_2d6db8f8626ab439.dat
+SYNTHETIC torsion	protein residue 12	Phi_12	SYNTHETIC_replica_1	SYNTHETIC_replica_2	300	240	0.048808482331581124	32	circular_fixed_bins	reports\diagnostics\distribution_7dd09b4aaaa7fd14.dat
+SYNTHETIC torsion	protein residue 12	Phi_12	SYNTHETIC_replica_1	SYNTHETIC_replica_3	300	360	0.07619036041654415	32	circular_fixed_bins	reports\diagnostics\distribution_7dd09b4aaaa7fd14.dat
+SYNTHETIC torsion	protein residue 12	Phi_12	SYNTHETIC_replica_2	SYNTHETIC_replica_3	240	360	0.06989138886527764	32	circular_fixed_bins	reports\diagnostics\distribution_7dd09b4aaaa7fd14.dat
+SYNTHETIC categorical states	synthetic residue 12	State_12	SYNTHETIC_replica_1	SYNTHETIC_replica_2	300	240	0.03416085720378227	3	categorical	reports\diagnostics\distribution_4af9f694919e0be1.dat
+SYNTHETIC categorical states	synthetic residue 12	State_12	SYNTHETIC_replica_1	SYNTHETIC_replica_3	300	360	0.02574542144334354	3	categorical	reports\diagnostics\distribution_4af9f694919e0be1.dat
+SYNTHETIC categorical states	synthetic residue 12	State_12	SYNTHETIC_replica_2	SYNTHETIC_replica_3	240	360	0.05983442357739522	3	categorical	reports\diagnostics\distribution_4af9f694919e0be1.dat

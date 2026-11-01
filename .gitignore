@@ -1,5 +1,17 @@
 __pycache__/
 *.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.test-output/
+.test-deps/
+runs/
+analysis_results/
+synthetic_demo/
+cluster.json
+/*.log
 /dist/
 /runs/
 md-bud.json

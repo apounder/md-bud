@@ -1,0 +1,359 @@
+{
+  "synthetic": true,
+  "description": "SYNTHETIC mathematical observables; not molecular dynamics results",
+  "replicas": [
+    {
+      "name": "SYNTHETIC_replica_1",
+      "status": "synthetic",
+      "frame_count": 300,
+      "artifacts": [
+        {
+          "path": "raw/SYNTHETIC_replica_1/rmsd.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC RMSD",
+          "section": "protein backbone",
+          "unit": "angstrom",
+          "metadata": {}
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_1/rg.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC radius of gyration",
+          "section": "protein",
+          "unit": "angstrom",
+          "metadata": {}
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_1/rmsf.dat",
+          "kind": "profile",
+          "analysis": "SYNTHETIC RMSF",
+          "section": "protein backbone",
+          "unit": "angstrom",
+          "metadata": {}
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_1/torsion.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC torsion",
+          "section": "protein residue 12",
+          "unit": "degree",
+          "metadata": {
+            "circular": true
+          }
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_1/states.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC categorical states",
+          "section": "synthetic residue 12",
+          "unit": "state",
+          "metadata": {
+            "categorical": true
+          }
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_1/correlation.dat",
+          "kind": "matrix",
+          "analysis": "SYNTHETIC correlation",
+          "section": "protein C-alpha",
+          "unit": "correlation",
+          "metadata": {
+            "matrix_format": "dense",
+            "matrix_type": "correlation",
+            "x_labels": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24
+            ],
+            "y_labels": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24
+            ],
+            "x_unit": "residue",
+            "y_unit": "residue"
+          }
+        }
+      ]
+    },
+    {
+      "name": "SYNTHETIC_replica_2",
+      "status": "synthetic",
+      "frame_count": 240,
+      "artifacts": [
+        {
+          "path": "raw/SYNTHETIC_replica_2/rmsd.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC RMSD",
+          "section": "protein backbone",
+          "unit": "angstrom",
+          "metadata": {}
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_2/rg.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC radius of gyration",
+          "section": "protein",
+          "unit": "angstrom",
+          "metadata": {}
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_2/rmsf.dat",
+          "kind": "profile",
+          "analysis": "SYNTHETIC RMSF",
+          "section": "protein backbone",
+          "unit": "angstrom",
+          "metadata": {}
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_2/torsion.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC torsion",
+          "section": "protein residue 12",
+          "unit": "degree",
+          "metadata": {
+            "circular": true
+          }
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_2/states.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC categorical states",
+          "section": "synthetic residue 12",
+          "unit": "state",
+          "metadata": {
+            "categorical": true
+          }
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_2/correlation.dat",
+          "kind": "matrix",
+          "analysis": "SYNTHETIC correlation",
+          "section": "protein C-alpha",
+          "unit": "correlation",
+          "metadata": {
+            "matrix_format": "dense",
+            "matrix_type": "correlation",
+            "x_labels": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24
+            ],
+            "y_labels": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24
+            ],
+            "x_unit": "residue",
+            "y_unit": "residue"
+          }
+        }
+      ]
+    },
+    {
+      "name": "SYNTHETIC_replica_3",
+      "status": "synthetic",
+      "frame_count": 360,
+      "artifacts": [
+        {
+          "path": "raw/SYNTHETIC_replica_3/rmsd.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC RMSD",
+          "section": "protein backbone",
+          "unit": "angstrom",
+          "metadata": {}
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_3/rg.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC radius of gyration",
+          "section": "protein",
+          "unit": "angstrom",
+          "metadata": {}
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_3/rmsf.dat",
+          "kind": "profile",
+          "analysis": "SYNTHETIC RMSF",
+          "section": "protein backbone",
+          "unit": "angstrom",
+          "metadata": {}
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_3/torsion.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC torsion",
+          "section": "protein residue 12",
+          "unit": "degree",
+          "metadata": {
+            "circular": true
+          }
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_3/states.dat",
+          "kind": "timeseries",
+          "analysis": "SYNTHETIC categorical states",
+          "section": "synthetic residue 12",
+          "unit": "state",
+          "metadata": {
+            "categorical": true
+          }
+        },
+        {
+          "path": "raw/SYNTHETIC_replica_3/correlation.dat",
+          "kind": "matrix",
+          "analysis": "SYNTHETIC correlation",
+          "section": "protein C-alpha",
+          "unit": "correlation",
+          "metadata": {
+            "matrix_format": "dense",
+            "matrix_type": "correlation",
+            "x_labels": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24
+            ],
+            "y_labels": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24
+            ],
+            "x_unit": "residue",
+            "y_unit": "residue"
+          }
+        }
+      ]
+    }
+  ],
+  "structure_view": {
+    "status": "example",
+    "selection": "Experimental crambin, PDB 1CRN",
+    "message": "Viewer example: experimental crambin (PDB 1CRN). The synthetic plots are unrelated to this structure; no crambin simulation was performed."
+  }
+}

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "md-bud"
+version = "2.0.0"
+description = "AMBER/Slurm campaigns and reproducible replica-aware CPPTRAJ analysis"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY.md"]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+analysis = ["numpy>=1.24"]
+plots = ["numpy>=1.24", "matplotlib>=3.7"]
+dev = ["numpy>=1.24", "matplotlib>=3.7", "build"]
+
+[project.scripts]
+md-bud = "mdbud.cli:main"
+mdworkbench = "mdwb.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mdbud*", "mdwb*"]
+
+[tool.setuptools.package-data]
+mdwb = ["*.html", "vendor/*.js", "vendor/*.txt", "vendor/*.json"]

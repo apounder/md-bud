@@ -1,0 +1,9 @@
+{
+  "name": "3Dmol.js",
+  "version": "2.5.3",
+  "downloaded": "2026-09-05",
+  "url": "https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.5.3/3Dmol-min.js",
+  "sha256": "bcf422137a34b4e206413a8a83a67c24a1ace84e282bf3b164f6bda6aeb42a20",
+  "license_file": "3Dmol-LICENSE.txt",
+  "license_url": "https://raw.githubusercontent.com/3dmol/3Dmol.js/2.5.3/LICENSE"
+}

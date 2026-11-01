@@ -1,5 +1,8 @@
 """Offline integration checks. No cluster jobs or AMBER simulations are run."""
-import fcntl
+try:
+    import fcntl
+except ImportError:
+    fcntl = None
 import json
 import os
 from pathlib import Path
@@ -52,6 +55,7 @@ elif command == 'cpptraj':
 '''
 
 
+@unittest.skipUnless(os.name == "posix", "POSIX Bash/Slurm process doubles; run on Linux CI")
 class CampaignTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix="md-bud-tests-")
@@ -265,7 +269,8 @@ class CampaignTests(unittest.TestCase):
         replica = self.project / "replica-001"
         (replica / "md-0002.nc").write_text("trajectory")
         (replica / "md-0002.out").write_text("output")
-        module = runpy.run_path(str(CLI))
+        from mdbud import campaign
+        module = vars(campaign)
         manifest = self.manifest()
         original = Path.rename
 

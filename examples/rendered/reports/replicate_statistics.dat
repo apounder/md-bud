@@ -1,0 +1,3 @@
+analysis	section	series	unit	n_replicas	equal_replica_mean	between_replica_mean_sd
+SYNTHETIC RMSD	protein backbone	RMSD	angstrom	3	1.718673093	0.09570666139
+SYNTHETIC radius of gyration	protein	Rg	angstrom	3	18.08103377	0.04039305017

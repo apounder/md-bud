@@ -1,0 +1,21 @@
+{
+  "frames": {
+    "start": 1,
+    "stop": -1,
+    "stride": 1,
+    "dt_ps": 20
+  },
+  "plots": {
+    "enabled": false,
+    "dpi": 300,
+    "alpha": 0.8
+  },
+  "stats": {
+    "block_size": 30,
+    "metric_correlations": true
+  },
+  "study": {
+    "title": "Synthetic report preview",
+    "description": "DESIGN DEMONSTRATION \u2014 artificial observables, not molecular-dynamics results."
+  }
+}

@@ -1,0 +1,19 @@
+replica	replica_status	analysis	section	kind	unit	parse_status	source
+SYNTHETIC_replica_1	synthetic	SYNTHETIC RMSD	protein backbone	timeseries	angstrom	parsed	raw/SYNTHETIC_replica_1/rmsd.dat
+SYNTHETIC_replica_1	synthetic	SYNTHETIC radius of gyration	protein	timeseries	angstrom	parsed	raw/SYNTHETIC_replica_1/rg.dat
+SYNTHETIC_replica_1	synthetic	SYNTHETIC RMSF	protein backbone	profile	angstrom	parsed	raw/SYNTHETIC_replica_1/rmsf.dat
+SYNTHETIC_replica_1	synthetic	SYNTHETIC torsion	protein residue 12	timeseries	degree	parsed	raw/SYNTHETIC_replica_1/torsion.dat
+SYNTHETIC_replica_1	synthetic	SYNTHETIC categorical states	synthetic residue 12	timeseries	state	parsed	raw/SYNTHETIC_replica_1/states.dat
+SYNTHETIC_replica_1	synthetic	SYNTHETIC correlation	protein C-alpha	matrix	correlation	parsed	raw/SYNTHETIC_replica_1/correlation.dat
+SYNTHETIC_replica_2	synthetic	SYNTHETIC RMSD	protein backbone	timeseries	angstrom	parsed	raw/SYNTHETIC_replica_2/rmsd.dat
+SYNTHETIC_replica_2	synthetic	SYNTHETIC radius of gyration	protein	timeseries	angstrom	parsed	raw/SYNTHETIC_replica_2/rg.dat
+SYNTHETIC_replica_2	synthetic	SYNTHETIC RMSF	protein backbone	profile	angstrom	parsed	raw/SYNTHETIC_replica_2/rmsf.dat
+SYNTHETIC_replica_2	synthetic	SYNTHETIC torsion	protein residue 12	timeseries	degree	parsed	raw/SYNTHETIC_replica_2/torsion.dat
+SYNTHETIC_replica_2	synthetic	SYNTHETIC categorical states	synthetic residue 12	timeseries	state	parsed	raw/SYNTHETIC_replica_2/states.dat
+SYNTHETIC_replica_2	synthetic	SYNTHETIC correlation	protein C-alpha	matrix	correlation	parsed	raw/SYNTHETIC_replica_2/correlation.dat
+SYNTHETIC_replica_3	synthetic	SYNTHETIC RMSD	protein backbone	timeseries	angstrom	parsed	raw/SYNTHETIC_replica_3/rmsd.dat
+SYNTHETIC_replica_3	synthetic	SYNTHETIC radius of gyration	protein	timeseries	angstrom	parsed	raw/SYNTHETIC_replica_3/rg.dat
+SYNTHETIC_replica_3	synthetic	SYNTHETIC RMSF	protein backbone	profile	angstrom	parsed	raw/SYNTHETIC_replica_3/rmsf.dat
+SYNTHETIC_replica_3	synthetic	SYNTHETIC torsion	protein residue 12	timeseries	degree	parsed	raw/SYNTHETIC_replica_3/torsion.dat
+SYNTHETIC_replica_3	synthetic	SYNTHETIC categorical states	synthetic residue 12	timeseries	state	parsed	raw/SYNTHETIC_replica_3/states.dat
+SYNTHETIC_replica_3	synthetic	SYNTHETIC correlation	protein C-alpha	matrix	correlation	parsed	raw/SYNTHETIC_replica_3/correlation.dat
